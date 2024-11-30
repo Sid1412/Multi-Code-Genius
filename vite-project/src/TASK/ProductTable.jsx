@@ -12,9 +12,9 @@ const limitOptions = [
 ];
 
 export default function Task() {
-    const [products, setProducts] = useState([]);  // All products data
-    const [pagination, setPagination] = useState({ limit: 20, page: 1 });  // Pagination state
-    const [count, setCount] = useState(0);  // Total number of products
+    const [products, setProducts] = useState([]);  
+    const [pagination, setPagination] = useState({ limit: 20, page: 1 });
+    const [count, setCount] = useState(0);
     const [modal, setModal] = useState(false);
     const [selectedProduct, setSelectedProduct] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
@@ -23,14 +23,14 @@ export default function Task() {
         const fetchData = async () => {
             setIsLoading(true);
             try {
-                // Fetch all products (don't limit them on the API side)
+               
                 const response = await axios.get("https://fakestoreapi.com/products");
                 const allProducts = response.data;
 
-                // Sort products by id to ensure they are ordered correctly
+               
                 const sortedProducts = allProducts.sort((a, b) => a.id - b.id);
                 setProducts(sortedProducts);
-                setCount(sortedProducts.length);  // Total number of products
+                setCount(sortedProducts.length);
             } catch (error) {
                 console.error("Error fetching products:", error);
                 toast.error("Failed to fetch products");
@@ -49,7 +49,7 @@ export default function Task() {
 
     // Handle changing products per page
     const handleLimitChange = (selectedOption) => {
-        setPagination({ page: 1, limit: selectedOption.value });  // Reset to page 1 when limit changes
+        setPagination({ page: 1, limit: selectedOption.value });  
     };
 
     const toggleModal = () => setModal(!modal);
@@ -59,13 +59,13 @@ export default function Task() {
         toggleModal();
     };
 
-    // Get the products to display based on the current pagination
+    
     const displayedProducts = products.slice(
         (pagination.page - 1) * pagination.limit,
         pagination.page * pagination.limit
     );
 
-    const totalPages = Math.ceil(count / pagination.limit); // Calculate total pages
+    const totalPages = Math.ceil(count / pagination.limit); 
 
     return (
         <div className="p-4">
@@ -84,9 +84,9 @@ export default function Task() {
 
                         <ReactSelect
                             className="w-32"
-                            onChange={handleLimitChange}  // Update pagination limit on selection
+                            onChange={handleLimitChange}  
                             options={limitOptions}
-                            defaultValue={limitOptions[2]}  // Default to 20 products per page
+                            defaultValue={limitOptions[2]}
                             placeholder="Rows"
                         />
                     </div>
@@ -100,7 +100,7 @@ export default function Task() {
                                 <thead className="bg-gray-100">
                                     <tr>
                                         {[
-                                            "Sr. No",
+                                            "Id",
                                             "Image",
                                             "Title",
                                             "Price",
@@ -123,7 +123,6 @@ export default function Task() {
                                     {displayedProducts.length > 0 ? (
                                         displayedProducts.map((product, index) => (
                                             <tr key={index} className="hover:bg-gray-50 transition-colors">
-                                                {/* Displaying Sr. No based on pagination */}
                                                 <td className="border border-gray-300 px-4 py-2 text-sm text-gray-700">
                                                     {(pagination.page - 1) * pagination.limit + index + 1}
                                                 </td>
@@ -176,8 +175,8 @@ export default function Task() {
                             onPageChange={pageChange}
                             pageCount={totalPages}
                             pageRangeDisplayed={3}
-                            forcePage={pagination.page - 1}  // Keep pagination in sync with the current page
-                            disabled={pagination.page === 1 || pagination.page === totalPages}  // Disable buttons when needed
+                            forcePage={pagination.page - 1}  
+                            disabled={pagination.page === 1 || pagination.page === totalPages} 
                         />
                     </div>
 

@@ -3,7 +3,7 @@ import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 import { Rating } from "flowbite-react";
 
 export default function Preview({ isOpen = true, toggle, product }) {
-  if (!product) return null; // Handle case when product is not defined
+  if (!product) return null; 
 
   return (
     <div>
@@ -31,10 +31,12 @@ export default function Preview({ isOpen = true, toggle, product }) {
             {/* Title */}
             <h3 className="text-xl font-semibold">{product.title}</h3>
 
+
             {/* Product ID */}
             <div className="text-sm text-gray-500">
               <strong>Product ID:</strong> {product.id}
             </div>
+
 
             {/* Rating */}
             <div className="flex items-center gap-2">
@@ -51,6 +53,7 @@ export default function Preview({ isOpen = true, toggle, product }) {
               </span>
             </div>
 
+
             {/* Description */}
             <div>
               <h4 className="font-semibold text-gray-800">Description:</h4>
@@ -58,6 +61,7 @@ export default function Preview({ isOpen = true, toggle, product }) {
                 {product.description}
               </p>
             </div>
+            
 
             {/* Price */}
             <div className="text-lg font-bold text-gray-700">
